@@ -1,4 +1,5 @@
 # Pocket Ledger — Android source project
+## Disclaimer: This app is coded entirely by ChatGPT 6.1 Sol
 
 Offline Android expense, income and savings tracker. This archive contains source code, not a compiled APK. Minimum Android 8.0 (API 26).
 
