@@ -1,6 +1,6 @@
 ## Pocket Ledger — Money Tree
 
-Offline Android app with an interactive money tree, allowance tracking, savings, spending, editable activities, monthly totals, notes and backups.
+Offline Android app with an interactive money tree, allowance tracking, savings, spending, editable activities, monthly totals, notes and backups!
 
 **The ready-made APK is available in this GitHub repository.** Download it to your phone and open it to install. To build it yourself, follow the Linux instructions below.
 
