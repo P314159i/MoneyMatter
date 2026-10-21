@@ -1,47 +1,80 @@
-# Pocket Ledger — Android source project
+## Pocket Ledger — Money Tree
 
-Offline Android expense, income and savings tracker. This archive contains source code, not a compiled APK. Minimum Android 8.0 (API 26).
+Offline Android app with an interactive money tree, allowance tracking, savings, spending, editable activities, monthly totals, notes and backups.
 
-## Features
-- Income grouped by named sources.
-- Opening and current spending/savings balances.
-- Expenses paid from spending or directly from savings.
-- Transfers between accounts never counted as income or expenses.
-- Monthly summaries and transaction deletion.
-- Private on-device storage with Android document-picker backup export/import.
-- No internet permission, bank connection, analytics, or hosted website.
+**The ready-made APK is available in this GitHub repository.** Download it to your phone and open it to install. To build it yourself, follow the Linux instructions below.
 
-The application uses an Android Java Activity and bundled HTML/JavaScript UI in a WebView. Financial data persists in the application's SharedPreferences. Uninstalling deletes local data. Export backups first. Currency changes format existing amounts without converting them.
+**Version 2.0 clears the previous ledger on its first launch.**
 
-## Build an installable APK on a computer
+## Build the APK on Linux
 
-Install JDK 17, Gradle 8.9, and Android SDK platform 35/build tools 35.0.0. Set ANDROID_HOME to your Android SDK directory (or set sdk.dir in a local.properties file).
+These commands target **Linux Mint / Ubuntu, 64-bit Intel or AMD**.
 
-From this project's directory:
+### 1. Check installed tools
 
-    gradle assembleDebug
+```bash
+java -version
+gradle --version
+"$HOME/tools/gradle-8.9/bin/gradle" --version
+ls -d "$HOME/Android/Sdk" /usr/lib/android-sdk 2>/dev/null
+```
 
-The signed debug installer is created at:
+The project uses **Java 17 and Gradle 8.9**. Skip installations you already have. [developer.android.com](https://developer.android.com/build/releases/agp-8-7-0-release-notes?hl=en\&utm_source=chatgpt.com)
 
-    app/build/outputs/apk/debug/app-debug.apk
+### 2. Install missing requirements
 
-Copy that APK to your Android phone, open it, and allow installation from your chosen Files/browser application when Android asks. A debug APK is intended for personal testing. For distribution, create your own release signing key and signed release build in Android Studio. Keep the signing key to update the app without uninstalling.
+Java 17 builds the app; Java 21 runs the current Android SDK manager.
 
-For Android Studio: install/select Gradle 8.9 locally, or first run `gradle wrapper --gradle-version 8.9` using installed Gradle. Then open this project, sync, and build the debug APK.
+```bash
+sudo apt update
+sudo apt install openjdk-17-jdk openjdk-21-jdk curl unzip
 
-## Alternative: GitHub Actions
+mkdir -p "$HOME/tools"
+curl -fL https://services.gradle.org/distributions/gradle-8.9-bin.zip -o /tmp/gradle.zip
+unzip -qo /tmp/gradle.zip -d "$HOME/tools"
+```
 
-Upload this project to a repository you control. In Actions, run **Build Android APK**. Download the **Pocket-Ledger-APK** artifact and unzip it to obtain app-debug.apk. This workflow is supplied but has not been run here. It uses third-party GitHub Actions and downloads build tools/dependencies during compilation. The app itself works offline.
+### 3. Install Android command-line tools if missing
 
-## Verification status
+```bash
+mkdir -p "$HOME/Android/Sdk/cmdline-tools"
+curl -fL https://dl.google.com/android/repository/commandlinetools-linux-15859902_latest.zip -o /tmp/android-tools.zip
+unzip -qo /tmp/android-tools.zip -d "$HOME/Android/Sdk/cmdline-tools"
+```
 
-JavaScript syntax and finance calculations were checked. XML and packaged file checks were completed. Android compilation and device/emulator testing were not performed: the creation environment lacks a working JDK/Android SDK/Gradle installation. A successful APK build is not claimed.
+The download comes from Google’s Android tools distribution. [Android Developers](https://developer.android.com/studio/index.html/?utm_source=chatgpt.com)
 
-## Accounting rules
+### 4. Install SDK components
 
-Income adds to spending. Spending expenses reduce spending. Transfers to savings reduce spending and increase savings. Savings withdrawals increase spending and reduce savings without counting as income. Direct savings expenses reduce savings and count as expenses. Monthly income minus expenses includes both expense types and excludes transfers. Account balances include every recorded transaction. Future-dated actual transactions are rejected.
+For an existing SDK, substitute its path below.
 
-## Build reference
+```bash
+export ANDROID_HOME="$HOME/Android/Sdk"
 
-Android Gradle plugin 8.7 requires Gradle 8.9 and JDK 17:
-https://developer.android.com/build/releases/agp-8-7-0-release-notes
+JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64 \
+"$ANDROID_HOME/cmdline-tools/cmdline-tools/bin/sdkmanager" \
+--sdk_root="$ANDROID_HOME" "platforms;android-35" "build-tools;34.0.0"
+```
+
+Read and accept the licence prompts.
+
+### 5. Build from the downloaded source folder
+
+Open a terminal in the folder containing `settings.gradle`, then run:
+
+```bash
+printf 'sdk.dir=%s\n' "$ANDROID_HOME" > local.properties
+
+JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 \
+"$HOME/tools/gradle-8.9/bin/gradle" assembleDebug
+```
+
+### 6. Install
+
+After **BUILD SUCCESSFUL**, copy this file to your phone and open it:
+
+```text
+app/build/outputs/apk/debug/app-debug.apk
+```
+
+For updates, use the same signing key as the installed app.

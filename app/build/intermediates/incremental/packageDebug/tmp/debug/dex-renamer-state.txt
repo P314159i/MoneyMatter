@@ -1,4 +1,4 @@
-#Wed Oct 21 16:06:11 CEST 2026
+#Wed Oct 21 16:18:05 CEST 2026
 base.1=/media/mintpi/S1/MoneyMatter/app/build/intermediates/dex/debug/mergeProjectDexDebug/1/classes.dex
 path.1=1/classes.dex
 base.0=/media/mintpi/S1/MoneyMatter/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex

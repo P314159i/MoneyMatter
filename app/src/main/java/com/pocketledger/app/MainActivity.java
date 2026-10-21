@@ -22,6 +22,10 @@ public class MainActivity extends Activity {
     @Override public void onCreate(Bundle saved) {
         super.onCreate(saved);
         prefs = getSharedPreferences("ledger", MODE_PRIVATE);
+        if (!prefs.getBoolean("treeFreshStart", false)) {
+            prefs.edit().remove("data").remove("previousData").putBoolean("treeFreshStart",true).commit();
+        }
+        ReminderReceiver.schedule(this);
         if (saved != null) pendingExport = saved.getString("pendingExport");
         getWindow().setStatusBarColor(Color.rgb(23,76,61));
         web = new WebView(this);
@@ -46,9 +50,9 @@ public class MainActivity extends Activity {
                 String url = r.getUrl().toString();
                 if (url.startsWith(ORIGIN)) {
                     String name = r.getUrl().getPath();
-                    if (name != null && name.matches("/(index.html|app.js|ledger.js|icon.svg)")) {
+                    if (name != null && name.matches("/(index.html|app.js|ledger.js|icon.svg|tree.png)")) {
                         try {
-                            String mime = name.endsWith(".js") ? "text/javascript" : name.endsWith(".svg") ? "image/svg+xml" : "text/html";
+                            String mime = name.endsWith(".png") ? "image/png" : name.endsWith(".js") ? "text/javascript" : name.endsWith(".svg") ? "image/svg+xml" : "text/html";
                             return new WebResourceResponse(mime,"UTF-8",getAssets().open(name.substring(1)));
                         } catch (IOException ignored) { }
                     }
@@ -60,10 +64,24 @@ public class MainActivity extends Activity {
     }
 
     public class StorageBridge {
+        @JavascriptInterface public void enableReminder() {
+            runOnUiThread(() -> {
+                prefs.edit().putBoolean("reminder",true).apply();
+                if(android.os.Build.VERSION.SDK_INT >= 33 && checkSelfPermission("android.permission.POST_NOTIFICATIONS") != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{"android.permission.POST_NOTIFICATIONS"},25);
+                } else configureAlarm();
+            });
+        }
         @JavascriptInterface public String load() { return prefs.getString("data", ""); }
         @JavascriptInterface public boolean save(String json) {
             if (json == null || json.length() > 10000000) return false;
-            try { new JSONObject(json); return prefs.edit().putString("data",json).commit(); }
+            try {
+                new JSONObject(json);
+                SharedPreferences.Editor edit = prefs.edit();
+                String previous = prefs.getString("data", "");
+                if (!previous.isEmpty()) edit.putString("previousData", previous);
+                return edit.putString("data",json).commit();
+            }
             catch (Exception e) { return false; }
         }
         @JavascriptInterface public void exportBackup(String json) {
@@ -119,6 +137,20 @@ public class MainActivity extends Activity {
             }).start();
         }
     }
+    private void configureAlarm() {
+        ReminderReceiver.schedule(this);
+        android.app.AlarmManager am=(android.app.AlarmManager)getSystemService(ALARM_SERVICE);
+        if(android.os.Build.VERSION.SDK_INT>=31 && !am.canScheduleExactAlarms()) {
+            try { startActivity(new Intent(android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM,Uri.parse("package:"+getPackageName()))); }
+            catch(Exception e) { message("Reminder enabled; Android can delay delivery without exact alarm access."); }
+        } else message("Monthly reminder enabled.");
+    }
+    @Override public void onRequestPermissionsResult(int request,String[] permissions,int[] results) {
+        super.onRequestPermissionsResult(request,permissions,results);
+        if(request==25 && results.length>0 && results[0]==android.content.pm.PackageManager.PERMISSION_GRANTED) configureAlarm();
+        else if(request==25) message("Notifications are blocked. Enable them in Android settings to receive reminders.");
+    }
+    @Override protected void onResume() { super.onResume(); ReminderReceiver.schedule(this); }
     private void message(String text) { runOnUiThread(() -> Toast.makeText(this,text,Toast.LENGTH_LONG).show()); }
     @Override protected void onSaveInstanceState(Bundle out) { super.onSaveInstanceState(out); if(pendingExport != null) out.putString("pendingExport",pendingExport); }
     @Override protected void onDestroy() { if(web != null) { web.removeJavascriptInterface("AndroidLedger"); web.destroy(); } super.onDestroy(); }

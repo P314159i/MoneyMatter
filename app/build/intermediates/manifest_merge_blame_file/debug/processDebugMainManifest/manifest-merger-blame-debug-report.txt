@@ -1,48 +1,84 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 3    package="com.pocketledger.app"
-4    android:versionCode="1"
-5    android:versionName="1.0" >
+4    android:versionCode="4"
+5    android:versionName="2.0" >
 6
 7    <uses-sdk
 8        android:minSdkVersion="26"
 9        android:targetSdkVersion="35" />
 10
-11    <application
-11-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:2:5-6:19
-12        android:allowBackup="false"
-12-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:2:85-112
-13        android:debuggable="true"
-14        android:extractNativeLibs="false"
-15        android:icon="@drawable/ic_launcher"
-15-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:2:48-84
-16        android:label="Pocket Ledger"
-16-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:2:18-47
-17        android:supportsRtl="true"
-17-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:2:214-240
-18        android:theme="@android:style/Theme.Material.Light.NoActionBar"
-18-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:2:113-176
-19        android:usesCleartextTraffic="false" >
-19-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:2:177-213
-20        <activity
-20-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:3:9-5:20
-21            android:name="com.pocketledger.app.MainActivity"
-21-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:3:19-47
-22            android:exported="true"
-22-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:3:48-71
-23            android:windowSoftInputMode="adjustResize" >
-23-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:3:72-114
-24            <intent-filter>
-24-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:4:13-154
-25                <action android:name="android.intent.action.MAIN" />
-25-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:4:28-79
-25-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:4:36-77
-26
-27                <category android:name="android.intent.category.LAUNCHER" />
-27-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:4:79-138
-27-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:4:89-136
-28            </intent-filter>
-29        </activity>
-30    </application>
-31
-32</manifest>
+11    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+11-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:2:5-76
+11-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:2:22-74
+12    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+12-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:3:5-80
+12-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:3:22-78
+13    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+13-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:4:5-78
+13-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:4:22-76
+14
+15    <application
+15-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:5:5-18:19
+16        android:allowBackup="false"
+16-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:5:85-112
+17        android:debuggable="true"
+18        android:extractNativeLibs="false"
+19        android:icon="@drawable/ic_launcher"
+19-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:5:48-84
+20        android:label="Pocket Ledger"
+20-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:5:18-47
+21        android:supportsRtl="true"
+21-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:5:214-240
+22        android:theme="@android:style/Theme.Material.Light.NoActionBar"
+22-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:5:113-176
+23        android:usesCleartextTraffic="false" >
+23-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:5:177-213
+24        <receiver
+24-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:6:9-14:20
+25            android:name="com.pocketledger.app.ReminderReceiver"
+25-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:6:19-51
+26            android:exported="false" >
+26-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:6:52-76
+27            <intent-filter>
+27-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:7:13-13:29
+28                <action android:name="android.intent.action.BOOT_COMPLETED" />
+28-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:8:17-78
+28-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:8:25-76
+29                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+29-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:9:17-83
+29-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:9:25-81
+30                <action android:name="android.intent.action.TIME_SET" />
+30-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:10:17-72
+30-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:10:25-70
+31                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+31-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:11:17-80
+31-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:11:25-78
+32                <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
+32-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:12:17-106
+32-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:12:25-104
+33            </intent-filter>
+34        </receiver>
+35
+36        <activity
+36-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:15:9-17:20
+37            android:name="com.pocketledger.app.MainActivity"
+37-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:15:19-47
+38            android:exported="true"
+38-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:15:48-71
+39            android:windowSoftInputMode="adjustResize" >
+39-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:15:72-114
+40            <intent-filter>
+40-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:16:13-154
+41                <action android:name="android.intent.action.MAIN" />
+41-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:16:28-79
+41-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:16:36-77
+42
+43                <category android:name="android.intent.category.LAUNCHER" />
+43-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:16:79-138
+43-->/media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:16:89-136
+44            </intent-filter>
+45        </activity>
+46    </application>
+47
+48</manifest>
