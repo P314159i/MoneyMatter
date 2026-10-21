@@ -28,14 +28,49 @@ public class MainActivity extends Activity {
         ReminderReceiver.schedule(this);
         if (saved != null) pendingExport = saved.getString("pendingExport");
         getWindow().setStatusBarColor(Color.rgb(23,76,61));
+        // Resize the WebView's parent, rather than padding the WebView itself:
+        // Chromium's viewport must exclude the system bars and keyboard.
+        android.widget.FrameLayout container = new android.widget.FrameLayout(this);
+        container.setBackgroundColor(Color.rgb(16,30,28));
         web = new WebView(this);
-        setContentView(web);
-        web.setPadding(0,0,0,0);
-        web.setOnApplyWindowInsetsListener((v,insets) -> {
-            v.setPadding(insets.getSystemWindowInsetLeft(), insets.getSystemWindowInsetTop(),
-                insets.getSystemWindowInsetRight(), insets.getSystemWindowInsetBottom());
-            return insets.consumeSystemWindowInsets();
+        container.addView(web,new android.widget.FrameLayout.LayoutParams(
+            android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+            android.view.ViewGroup.LayoutParams.MATCH_PARENT));
+        if (android.os.Build.VERSION.SDK_INT >= 30) {
+            getWindow().setDecorFitsSystemWindows(false);
+        } else {
+            getWindow().getDecorView().setSystemUiVisibility(
+                android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
+                android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+                android.view.View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+        }
+        container.setOnApplyWindowInsetsListener((v,insets) -> {
+            if (android.os.Build.VERSION.SDK_INT >= 30) {
+                android.graphics.Insets safe = insets.getInsets(
+                    android.view.WindowInsets.Type.systemBars() |
+                    android.view.WindowInsets.Type.displayCutout() |
+                    android.view.WindowInsets.Type.ime());
+                v.setPadding(safe.left,safe.top,safe.right,safe.bottom);
+                return new android.view.WindowInsets.Builder(insets)
+                    .setInsets(android.view.WindowInsets.Type.systemBars() |
+                        android.view.WindowInsets.Type.displayCutout() |
+                        android.view.WindowInsets.Type.ime(),android.graphics.Insets.NONE)
+                    .setDisplayCutout(null).build();
+            }
+            int left=insets.getSystemWindowInsetLeft(),top=insets.getSystemWindowInsetTop();
+            int right=insets.getSystemWindowInsetRight(),bottom=insets.getSystemWindowInsetBottom();
+            if (android.os.Build.VERSION.SDK_INT >= 28 && insets.getDisplayCutout()!=null) {
+                android.view.DisplayCutout cutout=insets.getDisplayCutout();
+                left=Math.max(left,cutout.getSafeInsetLeft());
+                top=Math.max(top,cutout.getSafeInsetTop());
+                right=Math.max(right,cutout.getSafeInsetRight());
+                bottom=Math.max(bottom,cutout.getSafeInsetBottom());
+            }
+            v.setPadding(left,top,right,bottom);
+            return insets.replaceSystemWindowInsets(0,0,0,0);
         });
+        setContentView(container);
+        container.requestApplyInsets();
         web.getSettings().setJavaScriptEnabled(true);
         web.getSettings().setAllowFileAccess(false);
         web.getSettings().setAllowContentAccess(false);
