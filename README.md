@@ -55,6 +55,10 @@ JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64 \
 "$ANDROID_HOME/cmdline-tools/cmdline-tools/bin/sdkmanager" \
 --sdk_root="$ANDROID_HOME" "platforms;android-35" "build-tools;34.0.0"
 ```
+### * Allow USB debuggingm then stream install
+```bash
+/usr/lib/android-sdk/platform-tools/adb devices
+```
 
 Read and accept the licence prompts.
 
