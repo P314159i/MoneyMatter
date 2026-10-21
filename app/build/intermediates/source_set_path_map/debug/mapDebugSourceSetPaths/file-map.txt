@@ -1,0 +1,7 @@
+com.pocketledger.app-pngs-0 /media/mintpi/S1/MoneyMatter/app/build/generated/res/pngs/debug
+com.pocketledger.app-resValues-1 /media/mintpi/S1/MoneyMatter/app/build/generated/res/resValues/debug
+com.pocketledger.app-packageDebugResources-2 /media/mintpi/S1/MoneyMatter/app/build/intermediates/incremental/debug/packageDebugResources/merged.dir
+com.pocketledger.app-packageDebugResources-3 /media/mintpi/S1/MoneyMatter/app/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
+com.pocketledger.app-debug-4 /media/mintpi/S1/MoneyMatter/app/build/intermediates/merged_res/debug/mergeDebugResources
+com.pocketledger.app-debug-5 /media/mintpi/S1/MoneyMatter/app/src/debug/res
+com.pocketledger.app-main-6 /media/mintpi/S1/MoneyMatter/app/src/main/res

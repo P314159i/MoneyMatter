@@ -1,0 +1,57 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:1:1-7:12
+INJECTED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:1:1-7:12
+INJECTED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:1:1-7:12
+INJECTED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:1:1-7:12
+	package
+		INJECTED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:1:11-69
+application
+ADDED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:2:5-6:19
+INJECTED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:2:5-6:19
+	android:extractNativeLibs
+		INJECTED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml
+	android:supportsRtl
+		ADDED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:2:214-240
+	android:label
+		ADDED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:2:18-47
+	android:icon
+		ADDED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:2:48-84
+	android:allowBackup
+		ADDED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:2:85-112
+	android:theme
+		ADDED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:2:113-176
+	android:usesCleartextTraffic
+		ADDED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:2:177-213
+activity#com.pocketledger.app.MainActivity
+ADDED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:3:9-5:20
+	android:windowSoftInputMode
+		ADDED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:3:72-114
+	android:exported
+		ADDED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:3:48-71
+	android:name
+		ADDED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:3:19-47
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:4:13-154
+action#android.intent.action.MAIN
+ADDED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:4:28-79
+	android:name
+		ADDED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:4:36-77
+category#android.intent.category.LAUNCHER
+ADDED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:4:79-138
+	android:name
+		ADDED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml:4:89-136
+uses-sdk
+INJECTED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml
+INJECTED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /media/mintpi/S1/MoneyMatter/app/src/main/AndroidManifest.xml
