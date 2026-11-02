@@ -1,7 +1,7 @@
-#Mon Nov 02 19:53:14 CET 2026
-base.1=/media/mintpi/S1/MoneyMatter/app/build/intermediates/dex/debug/mergeProjectDexDebug/1/classes.dex
+#Mon Nov 02 20:30:05 CET 2026
+base.1=/media/mintpi/S1/MoneyMatter/Personalized version - for myself/app/build/intermediates/dex/debug/mergeProjectDexDebug/1/classes.dex
 path.1=1/classes.dex
-base.0=/media/mintpi/S1/MoneyMatter/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
+base.0=/media/mintpi/S1/MoneyMatter/Personalized version - for myself/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
 renamed.1=classes2.dex
 renamed.0=classes.dex
 path.0=0/classes.dex

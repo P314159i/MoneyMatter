@@ -72,6 +72,9 @@ printf 'sdk.dir=/usr/lib/android-sdk\n' > /media/mintpi/S1/MoneyMatter/local.pro
 
 JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 \
 "$HOME/tools/gradle-8.9/bin/gradle" assembleDebug
+
+xdg-open "/media/mintpi/S1/MoneyMatter/Personalized version - for myself/app/build/outputs/apk/debug"
+
 ```
 
 ### 6. Install
@@ -79,7 +82,7 @@ JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 \
 After **BUILD SUCCESSFUL**, copy this file to your phone and open it:
 
 ```text
-app/build/outputs/apk/debug/app-debug.apk
+xdg-open "/media/mintpi/S1/MoneyMatter/Personalized version - for myself/app/build/outputs/apk/debug"
 ```
 
 For updates, use the same signing key as the installed app.
